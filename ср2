@@ -2,7 +2,7 @@
 #include <math.h>
 using namespace std;
 
-//СР_2, 14 Вариант.
+//СР_2, 24 Вариант.
 int main()
 {
 	setlocale(LC_ALL, "Russian");
