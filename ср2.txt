@@ -1,0 +1,28 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    float x,y;
+    cout<<"\nx=";cin>>x;
+    y=x-10*sin(x)+abs(pow(x,4)-pow(x,5));
+    cout<<"\ny="<<y;
+    return 0;
+}
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    float x,y,sap,sam;
+    cout<<"\nx=";cin>>x;
+    cout<<"\ny=";cin>>y;
+    sap=(pow(x,2)+pow(y,2))/2;
+    sam=(abs(x)+abs(y))/2;
+    cout<<"\nsap="<<sap;
+    cout<<"\nsam="<<sam;
+    return 0;
+}

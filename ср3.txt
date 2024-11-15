@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    float price, money, sdacha, nehvat;
+    
+    cout<< "\nцена книги: ";cin>>price;
+    cout<< "\nденег у покупателя: ";cin >>money;
+    
+    if (money == price)
+    {
+        cout << "\nСпасибо";
+    } 
+    else 
+    if (money > price)
+    {
+        sdacha = money-price;
+        cout << "\nВозьмите сдачу: " << sdacha;
+    } 
+    else
+    {
+        nehvat= price - money;
+        cout << "\nНе хватает: " << nehvat;
+    }
+
+    return 0;
+}
