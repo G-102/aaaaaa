@@ -1,0 +1,37 @@
+def transform_string(s):
+  """
+  Преобразует строку, заменяя символы в первой и второй половинах.
+
+  Args:
+    s: Исходная строка.
+
+  Returns:
+    Преобразованная строка.
+  """
+  n = len(s)
+  half_n = n // 2  
+
+  first_half = s[:half_n]
+  second_half = s[half_n:]
+
+  first_half = first_half.replace(':', '.')
+
+  second_half = second_half.replace('!', '.')
+
+  return first_half + second_half
+my_string = "Hello: world! This: is a test! Sentence."
+transformed_string = transform_string(my_string)
+print(f"Исходная строка: {my_string}")
+print(f"Преобразованная строка: {transformed_string}")
+my_string = "One:Two:Three!Four!Five!"
+transformed_string = transform_string(my_string)
+print(f"Исходная строка: {my_string}")
+print(f"Преобразованная строка: {transformed_string}")
+my_string = ":!:"
+transformed_string = transform_string(my_string)
+print(f"Исходная строка: {my_string}")
+print(f"Преобразованная строка: {transformed_string}")
+my_string = "!"
+transformed_string = transform_string(my_string)
+print(f"Исходная строка: {my_string}")
+print(f"Преобразованная строка: {transformed_string}")
