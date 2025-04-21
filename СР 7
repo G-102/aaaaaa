@@ -1,21 +1,43 @@
-def transform_string(s):
-  """
-  Преобразует строку, заменяя символы в первой и второй половинах.
+#include <iostream>
+#include <string>
+#include <algorithm>
 
-  Args:
-    s: Исходная строка.
+using namespace std;
 
-  Returns:
-    Преобразованная строка.
-  """
-  n = len(s)
-  half_n = n // 2  
+string transformString(string s) {
+    int n = s.length();
+    int halfN = n / 2;
 
-  first_half = s[:half_n]
-  second_half = s[half_n:]
+    string firstHalf = s.substr(0, halfN);
+    string secondHalf = s.substr(halfN);
 
-  first_half = first_half.replace(':', '.')
+    replace(firstHalf.begin(), firstHalf.end(), ':', '.');
 
-  second_half = second_half.replace('!', '.')
+    replace(secondHalf.begin(), secondHalf.end(), '!', '.');
 
-  return first_half + second_half
+    return firstHalf + secondHalf;
+}
+
+int main() {
+    string myString = "Hello: world! This: is a test! Sentence.";
+    string transformedString = transformString(myString);
+    cout << "Исходная строка: " << myString << endl;
+    cout << "Преобразованная строка: " << transformedString << endl;
+
+    myString = "One:Two:Three!Four!Five!";
+    transformedString = transformString(myString);
+    cout << "Исходная строка: " << myString << endl;
+    cout << "Преобразованная строка: " << transformedString << endl;
+
+    myString = ":!:";
+    transformedString = transformString(myString);
+    cout << "Исходная строка: " << myString << endl;
+    cout << "Преобразованная строка: " << transformedString << endl;
+
+    myString = "!";
+    transformedString = transformString(myString);
+    cout << "Исходная строка: " << myString << endl;
+    cout << "Преобразованная строка: " << transformedString << endl;
+
+    return 0;
+}
