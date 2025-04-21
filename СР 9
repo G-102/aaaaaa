@@ -1,35 +1,81 @@
-import re
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <limits> 
 
-def найти_минимальный_год(имя_файла):
-    """
-    Находит год с наименьшим номером в файле, содержащем даты.
+using namespace std;
 
-    Args:
-        имя_файла: Имя файла, содержащего даты в формате число месяц год.
-                    Например: "15 января 2023" или "20 02 2024".
+int findMinYear(const string& filename) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << filename << endl;
+        return numeric_limits<int>::max();
 
-    Returns:
-        Минимальный год (целое число) или None, если файл пустой или не содержит дат.
-    """
+    int minYear = numeric_limits<int>::max(); 
+    string line;
 
-    минимальный_год = None
+    while (getline(file, line)) {
+        stringstream ss(line);
+        int day, year;
+        string month;
 
-    try:
-        with open(имя_файла, 'r', encoding='utf-8') as файл:
-            for строка in файл:
-                match = re.search(r'\d{4}', строка)  
+       
+        if (ss >> day >> month >> year) {
+            
+            if (year > 0 && year < numeric_limits<int>::max()) {
+                minYear = min(minYear, year);
+            }
+        } else {
+           
+            ss.clear();
+            ss.str(line);
+            if (ss >> day >> month >> year) {
+              
+                if (year > 0 && year < numeric_limits<int>::max()) {
+                    minYear = min(minYear, year);
+                }
+            }
+        }
 
-                if match:
-                    год = int(match.group(0))  
+    }
 
-                    if минимальный_год is None or год < минимальный_год:
-                        минимальный_год = год
+    file.close();
 
-    except FileNotFoundError:
-        print(f"Ошибка: Файл '{имя_файла}' не найден.")
-        return None
-    except Exception as e:
-        print(f"Произошла ошибка при чтении файла: {e}")
-        return None
+    if (minYear == numeric_limits<int>::max()) {
+        cout << "В файле не найдено ни одной корректной даты." << endl;
+        return numeric_limits<int>::max();
+    }
 
-    return минимальный_год
+
+    return minYear;
+}
+
+int main() {
+    string filename = "dates.txt";
+
+    ofstream outfile(filename);
+    if (outfile.is_open()) {
+        outfile << "1 января 2020\n";
+        outfile << "15 февраля 2023\n";
+        outfile << "28 марта 2019\n";
+        outfile << "1 апреля 2021\n";
+        outfile << "10 мая 2020\n";
+        outfile << "30 июня 2024\n";
+        outfile.close();
+    } else {
+        cerr << "Не удалось создать пример файла dates.txt" << endl;
+        return 1;
+    }
+
+
+
+    int minYear = findMinYear(filename);
+
+    if (minYear != numeric_limits<int>::max()) {
+        cout << "Минимальный год в файле: " << minYear << endl;
+    }
+
+    return 0;
+}
